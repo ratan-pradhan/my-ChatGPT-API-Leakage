@@ -1,0 +1,25 @@
+name: Install and Run Python Script
+
+on: [push]  # Triggers the workflow on push or pull request
+
+jobs:
+  install-and-run:
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Check out the repository code
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  # Specify the Python version you want to use
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium==4.23.1 tqdm==4.66.5 openai==1.41.1
+
+      - name: Run script
+        run: |
+          python3 main.py
